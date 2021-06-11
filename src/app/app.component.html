@@ -1,0 +1,36 @@
+<div *ngIf="!summarisedText; else forminfo">
+  <form [formGroup]="rForm" (ngSubmit)="summarise(rForm.value)">
+    <div class = "form-container">
+      <div class = "row-columns">
+
+        <h1>DSTI Text Summarisation</h1>
+
+      <label><b>Input the long text to be summarised</b>
+          <!-- <input type="text" formControlName="phone"/> -->
+          <textarea placeholder="I need to summarise this" formControlName="longText" rows="20">
+
+          </textarea>
+      </label>
+      
+      <div class = "alert" *ngIf="!rForm.controls['longText'].valid && rForm.controls['longText'].touched"> {{ phoneAlert }}</div>
+
+        <input type = "submit" class="button expanded button-clear" value="Submit" [disabled]="!rForm.valid">
+
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<ng-template #forminfo>
+<div class ="form-container">
+    <div class="row columns">
+      <h1> Your Results</h1>
+      <img [src] = "gifUrl" class="img-style"/>
+
+      <p> {{summarisedText}}</p>
+
+      <button class="button-hover-back-home button expanded" (click)="backToForm()"><span>Clear</span><i class="fas fa-broom"></i></button>
+    </div>
+  </div>
+</ng-template>
